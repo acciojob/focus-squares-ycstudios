@@ -1,17 +1,33 @@
-document.querySelectorAll('.square').forEach(square => {
-    square.addEventListener('mouseover', (e) => {
-        document.querySelectorAll('.square').forEach(sq => {
-            if (sq !== e.target) {
-                sq.style.backgroundColor = 'rgb(111, 78, 55)'; // Coffee color
-            }
-        });
+function initializeSquares() {
+    // Remove any existing event listeners first
+    document.querySelectorAll('.square').forEach(square => {
+        square.replaceWith(square.cloneNode(true));
     });
 
-    square.addEventListener('mouseleave', () => {
-        setTimeout(() => { // Ensure async execution for Cypress
+    // Add new event listeners
+    document.querySelectorAll('.square').forEach(square => {
+        // Set initial color
+        square.style.backgroundColor = 'rgb(230, 230, 250)';
+
+        square.addEventListener('mouseover', function(e) {
             document.querySelectorAll('.square').forEach(sq => {
-                sq.style.backgroundColor = 'rgb(230, 230, 250)'; // Reset to Lavender
+                if (sq !== e.target) {
+                    sq.style.backgroundColor = 'rgb(111, 78, 55)';
+                }
             });
-        }, 50); // Small delay to allow color update
+        });
+
+        square.addEventListener('mouseleave', function() {
+            document.querySelectorAll('.square').forEach(sq => {
+                sq.style.backgroundColor = 'rgb(230, 230, 250)';
+            });
+        });
     });
-});
+}
+
+// Wait for DOM to be ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeSquares);
+} else {
+    initializeSquares();
+}
