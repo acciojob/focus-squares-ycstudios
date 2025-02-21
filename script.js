@@ -8,8 +8,10 @@ document.querySelectorAll('.square').forEach(square => {
     });
 
     square.addEventListener('mouseleave', () => {
-        document.querySelectorAll('.square').forEach(sq => {
-            sq.style.backgroundColor = 'rgb(230, 230, 250)'; // Reset to Lavender
-        });
+        setTimeout(() => { // Ensure async execution for Cypress
+            document.querySelectorAll('.square').forEach(sq => {
+                sq.style.backgroundColor = 'rgb(230, 230, 250)'; // Reset to Lavender
+            });
+        }, 50); // Small delay to allow color update
     });
 });
