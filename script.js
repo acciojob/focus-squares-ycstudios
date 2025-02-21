@@ -10,7 +10,7 @@ document.querySelectorAll('.square').forEach(square => {
 
     square.addEventListener('mouseleave', () => {
         document.querySelectorAll('.square').forEach(sq => {
-            sq.style.background = '#E6E6FA'; // Reset to Lavender
+            sq.style.background = 'rgb(230, 230, 250)'; // Reset to Lavender
         });
     });
 });
